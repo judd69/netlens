@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NetLens — X-ray any domain or IP</title>
+    <meta name="description" content="DNS records, mail health, and IP lookup on one clean page. No signup, no key." />
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body>
+    <div class="bg-grid" aria-hidden="true"></div>
+    <header class="topbar">
+      <div class="logo"><span class="lens" aria-hidden="true">◉</span> Net<span>Lens</span></div>
+      <p class="tagline">X-ray any domain or IP — no signup, no key, no clutter.</p>
+    </header>
+
+    <main class="wrap">
+      <section class="hero" aria-label="Search">
+        <h1>What do you want to look up?</h1>
+        <p class="sub">Paste a domain, a URL, or an IP address. NetLens figures out the rest.</p>
+        <form id="search-form" class="search" role="search">
+          <label class="sr-only" for="query">Domain, URL, or IP address</label>
+          <input id="query" name="q" type="text" autocomplete="off" spellcheck="false"
+            placeholder="Try example.com, https://github.com, or 8.8.8.8" />
+          <button type="submit">Inspect →</button>
+        </form>
+        <div class="chips" role="group" aria-label="Try an example">
+          <span>Try:</span>
+          <button type="button" data-example="example.com">example.com</button>
+          <button type="button" data-example="github.com">github.com</button>
+          <button type="button" data-example="8.8.8.8">8.8.8.8</button>
+          <button type="button" data-example="2001:4860:4860::8888">2001:4860:4860::8888</button>
+        </div>
+        <p id="input-error" class="error" role="alert" hidden></p>
+        <p id="timing" class="timing" aria-live="polite"></p>
+      </section>
+
+      <section id="my-ip" class="card my-ip" aria-label="Your IP address">
+        <div>
+          <h2>What's my IP?</h2>
+          <p id="my-ip-value" class="ip-value">Detecting…</p>
+          <p id="my-ip-note" class="muted">Your public address, fetched in your browser.</p>
+        </div>
+        <button id="inspect-my-ip" type="button" disabled>Inspect it →</button>
+      </section>
+
+      <section id="results" class="results" aria-live="polite"></section>
+
+      <section class="card history" aria-label="Recent searches">
+        <div class="row-between">
+          <h2>Recent searches</h2>
+          <button id="clear-history" type="button" class="ghost">Clear</button>
+        </div>
+        <ul id="history-list" class="history-list"><li class="muted">Nothing yet — your recent lookups will appear here.</li></ul>
+      </section>
+
+      <footer class="foot">
+        <p>Data: Google DNS-over-HTTPS · ipwho.is · ipify — all queried from your browser. No server, no tracking.</p>
+        <p class="muted">Honest limits: browser-side only, so no WHOIS/RDAP, and DKIM can't be checked without a selector. ipwho.is is rate-limited on its free tier.</p>
+      </footer>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>
